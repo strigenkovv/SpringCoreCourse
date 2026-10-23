@@ -1,4 +1,4 @@
-﻿package be.vdab.welkom.landen;
+package be.vdab.welkom.landen;
 
 public class Land {
     private final String code;

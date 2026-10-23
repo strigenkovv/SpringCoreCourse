@@ -1,4 +1,4 @@
-﻿package be.vdab.welkom.landen;
+package be.vdab.welkom.landen;
 
 import org.springframework.stereotype.Component;
 
