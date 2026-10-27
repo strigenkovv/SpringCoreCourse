@@ -5,12 +5,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class LandRepository {
+    private final String pad;
+
+    public LandRepository(@Value("${landenCsvPad}") String pad) {
+        this.pad = pad;
+    }
     public List<Land> findAll() {
-        try (var regels = Files.lines(Path.of("D:/opleding/Spring/SpringCoreMateriaal/landen.csv"))) {
+        try (var regels = Files.lines(Path.of(pad))) {
             return regels
                     .map(regel -> regel.split(","))
                     .map(regelOnderdelen -> new Land(

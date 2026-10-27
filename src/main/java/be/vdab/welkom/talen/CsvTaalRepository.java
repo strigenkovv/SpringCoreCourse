@@ -6,14 +6,20 @@ import java.nio.file.Path;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 @Qualifier("CSV")
 public class CsvTaalRepository implements TaalRepository {
+    private final String pad;
+
+    public CsvTaalRepository(@Value("${talenCsvPad}") String pad) {
+        this.pad = pad;
+    }
     @Override
     public List<Taal> findAll() {
-        try (var regels = Files.lines(Path.of("D:/opleding/Spring/SpringCoreMateriaal/talen.csv"))) {
+        try (var regels = Files.lines(Path.of(pad))) {
             return regels
                     .map(regel -> regel.split(","))
                     .map(regelOnderdelen -> new Taal(
